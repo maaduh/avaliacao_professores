@@ -17,7 +17,7 @@ model User {
   id    Int     @id @default(autoincrement())
   name  String
   email String  @unique
-  senha String
+  senha String 
   departamento String
   curso String
   foto Bytes?
@@ -26,3 +26,15 @@ model User {
 
   @@map("usuarios")
 }
+
+model comments {
+  id    Int     @id @default(autoincrement())
+  userID  Int
+  avalID  Int
+  conteudo String
+  createdt DateTime @default(now())
+  updateddt DateTime @updatedAt
+
+  @@map("comentarios")
+  
+  }
