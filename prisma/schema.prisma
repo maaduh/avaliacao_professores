@@ -38,3 +38,14 @@ model comments {
   @@map("comentarios")
   
   }
+
+model professor {
+  id  Int   @id @default(autoincrement())
+  nome String
+  departamento  String
+  diciplinaID Int
+  createdt DateTime @default(now())
+  updateddt DateTime @updatedAt
+
+  @@map("professores")
+}
