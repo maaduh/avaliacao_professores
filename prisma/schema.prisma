@@ -49,3 +49,13 @@ model professor {
 
   @@map("professores")
 }
+
+model avaliacao {
+  id  Int   @id @default(autoincrement())
+  usuarioID Int
+  diciplinaID Int
+  professorID Int
+  conteudo String
+  createdt DateTime @default(now())
+  updateddt DateTime @updatedAt 
+}
