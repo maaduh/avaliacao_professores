@@ -27,4 +27,9 @@ export class AvaliacaoController {
     async getById(@Param("id") id: number){
         return this.AvaliacaoService.getById(Number(id));
     }
+
+    @Get("comments/:id")
+    async Getavalcomments(@Param("id") id: number){
+        return this.AvaliacaoService.Getavalcomments(Number(id));
+    }
 }

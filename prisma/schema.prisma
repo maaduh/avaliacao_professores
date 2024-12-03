@@ -24,6 +24,9 @@ model User {
   createdt DateTime @default(now())
   updateddt DateTime @updatedAt
 
+  avaliacoes   avaliacao[]     @relation("UsuarioAvaliacoes")
+  comentarios  comments[]      @relation("UsuarioComentarios")
+
   @@map("usuarios")
 }
 
@@ -34,6 +37,9 @@ model comments {
   conteudo String
   createdt DateTime @default(now())
   updateddt DateTime @updatedAt
+
+  usuario   User      @relation(fields: [userID], references: [id], name: "UsuarioComentarios")
+  avaliacao avaliacao @relation(fields: [avalID], references: [id], name: "AvaliacaoComentarios")
 
   @@map("comentarios")
   
@@ -47,6 +53,8 @@ model professor {
   createdt DateTime @default(now())
   updateddt DateTime @updatedAt
 
+  avaliacoes  avaliacao[] @relation("ProfessorAvaliacoes")
+
   @@map("professores")
 }
 
@@ -57,5 +65,9 @@ model avaliacao {
   professorID Int
   conteudo String
   createdt DateTime @default(now())
-  updateddt DateTime @updatedAt 
+  updateddt DateTime @updatedAt
+
+  comentarios comments[]    @relation("AvaliacaoComentarios")
+  usuario      User        @relation(fields: [usuarioID], references: [id], name: "UsuarioAvaliacoes")
+  professor    professor   @relation(fields: [professorID], references: [id], name: "ProfessorAvaliacoes") 
 }
