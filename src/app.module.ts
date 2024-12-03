@@ -12,9 +12,10 @@ import { APP_GUARD } from '@nestjs/core';
 import { JwtAuthGuard } from './auth/guards/jwt-auth.guard';
 import { ProfessorModule } from './professor/professor.module';
 import { AvaliacaoModule } from './avaliacao/avaliacao.module';
+import { DiciplinaModule } from './diciplina/diciplina.module';
 
 @Module({
-  imports: [UserModule, CommentsModule, AuthModule, ProfessorModule, AvaliacaoModule],
+  imports: [UserModule, CommentsModule, AuthModule, ProfessorModule, AvaliacaoModule, DiciplinaModule],
   controllers: [AppController],
   providers: [AppService,{
     provide: APP_GUARD,

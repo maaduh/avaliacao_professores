@@ -66,7 +66,7 @@ export class AvaliacaoService {
       async Getavalcomments(id: number){
         const avaliacao = await this.prisma.avaliacao.findUnique({
           where: { id },
-          include: { comentarios: true, professor: true, usuario: true },
+          include: { comentarios: true, professor: true, usuario: true, diciplina:true },
         });
         return avaliacao
         

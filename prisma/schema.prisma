@@ -53,6 +53,7 @@ model professor {
   createdt DateTime @default(now())
   updateddt DateTime @updatedAt
 
+  disciplina   diciplina    @relation(fields: [diciplinaID], references: [id])
   avaliacoes  avaliacao[] @relation("ProfessorAvaliacoes")
 
   @@map("professores")
@@ -70,4 +71,17 @@ model avaliacao {
   comentarios comments[]    @relation("AvaliacaoComentarios")
   usuario      User        @relation(fields: [usuarioID], references: [id], name: "UsuarioAvaliacoes")
   professor    professor   @relation(fields: [professorID], references: [id], name: "ProfessorAvaliacoes") 
+  diciplina diciplina      @relation(fields: [diciplinaID], references: [id], name: "DiciplinaAvaliacoes")
+}
+
+model diciplina {
+  id Int @id @default(autoincrement())
+  nome String 
+  professoresID String
+  createdt DateTime @default(now())
+  updateddt DateTime @updatedAt
+
+  professor professor[] 
+  avaliacao avaliacao[] @relation("DiciplinaAvaliacoes")
+
 }
