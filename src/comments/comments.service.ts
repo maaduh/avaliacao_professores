@@ -7,10 +7,24 @@ export class CommentsService {
     constructor (private prisma: PrismaService) {}
 
     async create(data: commentsDto){
-        const comments = await this.prisma.comments.create({
-            data,
-          });
-        return comments
+      const userExists = await this.prisma.user.findUnique({
+        where: { id: data.userID },
+      });
+      if (!userExists) {
+          throw new Error('Usuário não encontrado.');
+      }
+
+      const avaliacaoExists = await this.prisma.avaliacao.findUnique({
+          where: { id: data.avalID },
+      });
+      if (!avaliacaoExists) {
+          throw new Error('Avaliação não encontrada.');
+      }
+
+      return await this.prisma.comments.create({
+          data,
+      });
+
     }
     async findALL(){
         return await this.prisma.comments.findMany();
