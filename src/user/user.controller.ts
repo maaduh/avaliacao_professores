@@ -1,6 +1,7 @@
 import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 import { userDto } from './dto/user.dto';
 import { UserService } from './user.service';
+import { IsPublic } from 'src/auth/decorators/is-public.decorator';
 
 @Controller('user')
 export class UserController {
@@ -26,8 +27,12 @@ export class UserController {
         return this.userService.delete(Number(id));
     }
 
-    @Get(":id")
+    @Get("id/:id")
     async getById(@Param("id") id: number){
         return this.userService.getById(Number(id));
+    }
+    @Post("email")
+    async findByEmail(@Body('email') email: string){
+        return this.userService.findByEmail(email);
     }
 }
