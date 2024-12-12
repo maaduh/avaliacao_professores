@@ -8,7 +8,7 @@ export class AvaliacaoService {
 
     async create(data: avaliacaoDto){
         const avaliacao = await this.prisma.avaliacao.create({
-            data,
+            data
           });
         return avaliacao
     }

@@ -80,8 +80,16 @@ export class UserService {
           email,
         },
       });
-
     }
+
+    async GetuserPosts(id: number){
+      const posts = await this.prisma.user.findUnique({
+        where: { id },
+        include: { avaliacoes: true},
+      });
+      return posts
+    }
+
 }
 
 

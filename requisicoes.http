@@ -1,0 +1,12 @@
+GET http://localhost:3001/comments
+
+
+###
+POST http://localhost:3001/comments
+Content-Type: application/json
+
+{
+    "userID": 1,
+    "avalID": 1,
+    "conteudo": "oies"
+}
