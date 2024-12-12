@@ -71,4 +71,13 @@ export class AvaliacaoService {
         return avaliacao
         
       }
+
+      async CountAvalComments(id: number){
+        const avaliacao = await this.prisma.avaliacao.findUnique({
+          where: { id },
+          include: { comentarios: true},
+        });
+        return avaliacao?.comentarios?.length || 0;
+        
+      }
 }
