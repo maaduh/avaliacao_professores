@@ -35,9 +35,12 @@ export class UserService {
       if(!userExists) {
         throw new Error("usuário não encontrado");
       }
-
+      const senhaHashed = await bcrypt.hash(data.senha, 10);
       await this.prisma.user.update({
-        data,
+        data: {
+          ...data,            
+          senha: senhaHashed, 
+      },
         where: {
           id,
         }
