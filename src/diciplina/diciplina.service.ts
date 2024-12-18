@@ -86,4 +86,11 @@ export class DiciplinaService {
         return professores
       
     }
+    async getByname(nome: string) {
+      const disciplina = await this.prisma.diciplina.findMany({ where: { nome } });
+      if (!disciplina) {
+          throw new Error('disciplina não encontrada');
+      }
+      return disciplina;
+  }
 }
