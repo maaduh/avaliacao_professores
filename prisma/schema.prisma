@@ -77,7 +77,7 @@ model avaliacao {
 model diciplina {
   id Int @id @default(autoincrement())
   nome String 
-  professoresID String
+  professoresID String?
   createdt DateTime @default(now())
   updateddt DateTime @updatedAt
 

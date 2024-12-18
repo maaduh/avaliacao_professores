@@ -35,9 +35,12 @@ export class UserService {
       if(!userExists) {
         throw new Error("usuário não encontrado");
       }
-
+      const senhaHashed = await bcrypt.hash(data.senha, 10);
       await this.prisma.user.update({
-        data,
+        data: {
+          ...data,            
+          senha: senhaHashed, 
+      },
         where: {
           id,
         }
@@ -80,8 +83,16 @@ export class UserService {
           email,
         },
       });
-
     }
+
+    async GetuserPosts(id: number){
+      const posts = await this.prisma.user.findUnique({
+        where: { id },
+        include: { avaliacoes: true},
+      });
+      return posts
+    }
+
 }
 
 

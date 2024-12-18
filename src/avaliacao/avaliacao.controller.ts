@@ -32,4 +32,9 @@ export class AvaliacaoController {
     async Getavalcomments(@Param("id") id: number){
         return this.AvaliacaoService.Getavalcomments(Number(id));
     }
+
+    @Get("countcomments/:id")
+    async CountAvalComments(@Param("id") id: number){
+        return this.AvaliacaoService.CountAvalComments(Number(id));
+    }
 }

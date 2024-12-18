@@ -8,7 +8,7 @@ export class AvaliacaoService {
 
     async create(data: avaliacaoDto){
         const avaliacao = await this.prisma.avaliacao.create({
-            data,
+            data
           });
         return avaliacao
     }
@@ -69,6 +69,15 @@ export class AvaliacaoService {
           include: { comentarios: true, professor: true, usuario: true, diciplina:true },
         });
         return avaliacao
+        
+      }
+
+      async CountAvalComments(id: number){
+        const avaliacao = await this.prisma.avaliacao.findUnique({
+          where: { id },
+          include: { comentarios: true},
+        });
+        return avaliacao?.comentarios?.length || 0;
         
       }
 }

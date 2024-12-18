@@ -62,4 +62,16 @@ export class ProfessorService {
         }
         return professorExists
       }
+
+      async getByname(nome: string) {
+        const professorExists = await this.prisma.professor.findFirst({
+          where: {
+            nome,
+          }
+        });
+        if(!professorExists) {
+          throw new Error("Professor não encontrado");
+        }
+        return professorExists
+      }
 }

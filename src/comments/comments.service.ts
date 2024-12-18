@@ -7,25 +7,19 @@ export class CommentsService {
     constructor (private prisma: PrismaService) {}
 
     async create(data: commentsDto){
-      const userExists = await this.prisma.user.findUnique({
-        where: { id: data.userID },
-      });
-      if (!userExists) {
-          throw new Error('Usuário não encontrado.');
-      }
-
-      const avaliacaoExists = await this.prisma.avaliacao.findUnique({
-          where: { id: data.avalID },
-      });
-      if (!avaliacaoExists) {
-          throw new Error('Avaliação não encontrada.');
-      }
-
+      console.log('Data being inserted:', data);
+      
+      // Ensure userID is an integer
+      const processedData = {
+          ...data,
+          userID: parseInt(data.userID as unknown as string, 10)
+      };
+  
       return await this.prisma.comments.create({
-          data,
+          data: processedData
       });
-
-    }
+  }
+  
     async findALL(){
         return await this.prisma.comments.findMany();
     }

@@ -7,6 +7,7 @@ import { IsPublic } from 'src/auth/decorators/is-public.decorator';
 export class UserController {
     constructor (private readonly userService: UserService) {}
 
+    @IsPublic()
     @Post()
     async create(@Body() data: userDto){
         return this.userService.create(data);
@@ -34,5 +35,9 @@ export class UserController {
     @Post("email")
     async findByEmail(@Body('email') email: string){
         return this.userService.findByEmail(email);
+    }
+    @Get("posts/:id")
+    async GetuserPosts(@Param("id") id: number){
+        return this.userService.GetuserPosts(Number(id));
     }
 }
