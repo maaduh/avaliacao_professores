@@ -27,6 +27,7 @@ export class ProfessorController {
         return this.professorService.delete(Number(id));
     }
 
+    @IsPublic()
     @Get(":id")
     async getById(@Param("id") id: number){
         return this.professorService.getById(Number(id));
@@ -35,5 +36,11 @@ export class ProfessorController {
     @Get(":nome")
     async getByname(@Param("nome") nome: string){
         return this.professorService.getByname(String(nome));
+    }
+
+    @IsPublic()
+    @Get("avals/:id")
+    async Getprofaval(@Param("id") id: number){
+        return this.professorService.Getprofaval(Number(id));
     }
 }

@@ -1,6 +1,7 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, Put } from '@nestjs/common';
 import { AvaliacaoService } from './avaliacao.service';
 import { avaliacaoDto } from './dto/avaliacao.dto';
+import { IsPublic } from 'src/auth/decorators/is-public.decorator';
 
 @Controller('avaliacao')
 export class AvaliacaoController {
@@ -28,6 +29,7 @@ export class AvaliacaoController {
         return this.AvaliacaoService.getById(Number(id));
     }
 
+    @IsPublic()
     @Get("comments/:id")
     async Getavalcomments(@Param("id") id: number){
         return this.AvaliacaoService.Getavalcomments(Number(id));

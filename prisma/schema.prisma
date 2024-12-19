@@ -38,8 +38,8 @@ model comments {
   createdt DateTime @default(now())
   updateddt DateTime @updatedAt
 
-  usuario   User      @relation(fields: [userID], references: [id], name: "UsuarioComentarios")
-  avaliacao avaliacao @relation(fields: [avalID], references: [id], name: "AvaliacaoComentarios")
+  usuario   User      @relation(fields: [userID], references: [id], name: "UsuarioComentarios", onDelete: Cascade)
+  avaliacao avaliacao @relation(fields: [avalID], references: [id], name: "AvaliacaoComentarios", onDelete: Cascade)
 
   @@map("comentarios")
   
@@ -53,7 +53,7 @@ model professor {
   createdt DateTime @default(now())
   updateddt DateTime @updatedAt
 
-  disciplina   diciplina    @relation(fields: [diciplinaID], references: [id])
+  disciplina   diciplina    @relation(fields: [diciplinaID], references: [id], onDelete: Cascade)
   avaliacoes  avaliacao[] @relation("ProfessorAvaliacoes")
 
   @@map("professores")
@@ -69,9 +69,9 @@ model avaliacao {
   updateddt DateTime @updatedAt
 
   comentarios comments[]    @relation("AvaliacaoComentarios")
-  usuario      User        @relation(fields: [usuarioID], references: [id], name: "UsuarioAvaliacoes")
-  professor    professor   @relation(fields: [professorID], references: [id], name: "ProfessorAvaliacoes") 
-  diciplina diciplina      @relation(fields: [diciplinaID], references: [id], name: "DiciplinaAvaliacoes")
+  usuario      User        @relation(fields: [usuarioID], references: [id], name: "UsuarioAvaliacoes", onDelete: Cascade)
+  professor    professor   @relation(fields: [professorID], references: [id], name: "ProfessorAvaliacoes", onDelete: Cascade) 
+  diciplina diciplina      @relation(fields: [diciplinaID], references: [id], name: "DiciplinaAvaliacoes", onDelete: Cascade)
 }
 
 model diciplina {
