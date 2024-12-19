@@ -28,6 +28,7 @@ export class UserController {
         return this.userService.delete(Number(id));
     }
 
+    @IsPublic()
     @Get("id/:id")
     async getById(@Param("id") id: number){
         return this.userService.getById(Number(id));
@@ -36,6 +37,8 @@ export class UserController {
     async findByEmail(@Body('email') email: string){
         return this.userService.findByEmail(email);
     }
+
+    @IsPublic()
     @Get("posts/:id")
     async GetuserPosts(@Param("id") id: number){
         return this.userService.GetuserPosts(Number(id));

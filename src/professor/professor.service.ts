@@ -74,4 +74,13 @@ export class ProfessorService {
         }
         return professorExists
       }
+
+      async Getprofaval(id: number){
+        const avaliacao = await this.prisma.professor.findUnique({
+          where: { id },
+          include: { avaliacoes: true},
+        });
+        return avaliacao
+        
+      }  
 }
